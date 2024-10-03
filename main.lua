@@ -1,5 +1,8 @@
 function love.load()
     -- importing libraries and images
+
+    anim8 = require('libraries/anim8')
+
     background = love.graphics.newImage('maps/fancy-court.png')
 
     -- defining player paddles
