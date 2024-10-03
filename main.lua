@@ -1,9 +1,14 @@
 function love.load()
--- importing libraries
+    -- importing libraries and images
+    background = love.graphics.newImage('maps/fancy-court.png')
 
--- defining player paddles
+    -- defining player paddles
+    p1Paddle = love.graphics.newImage('sprites/fancy-paddle-blue.png')
+    cpuPaddle = love.graphics.newImage('sprites/fancy-paddle-green.png')
 
-
+    -- starting player scores
+    p1Score = 0
+    cpuScore = 0
 
 -- animations
 
@@ -24,5 +29,10 @@ function love.update(dt)
 end
 
 function love.draw()
+
+  -- background
+  love.graphics.draw(background, 0,0)
+  love.graphics.draw(p1Paddle, 0,250)
+  love.graphics.draw(cpuPaddle, 766, 250)
   -- camera
 end
