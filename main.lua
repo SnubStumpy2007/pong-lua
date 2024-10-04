@@ -2,6 +2,7 @@ function love.load()
     -- importing libraries and images
 
     anim8 = require('libraries/anim8')
+    sti = require('libraries.sti')
 
     background = love.graphics.newImage('maps/fancy-court.png')
 
@@ -17,6 +18,9 @@ function love.load()
 
 
     ball = love.graphics.newImage('sprites/fancy-ball.png')
+
+    -- code for map
+    gameMap = sti('maps/court.lua')
 
     -- starting player scores
     p1Score = { }
@@ -44,7 +48,7 @@ end
 function love.draw()
 
   -- background
-  -- love.graphics.draw(background, 0,0)
+    gameMap:draw()
   -- love.graphics.draw(p1Paddle, 0,250)
   --p1paddle.anim:draw(p1paddle.sprite, p1paddle.x, p1paddle.y, nil, 1, nil, 16, 64)
   -- love.graphics.draw(cpuPaddle, 766, 250)

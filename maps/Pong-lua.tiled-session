@@ -1,0 +1,35 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "court.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "court.tmx": {
+            "scale": 0.8915826612903225,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 496.3084402736165,
+                "y": 319.65628356605805
+            }
+        },
+        "court.tmx#fancy-court": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "D:/love2d/projects/Pong/pong-lua/maps",
+    "last.imagePath": "D:/love2d/projects/Pong/pong-lua/maps",
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 31,
+    "openFiles": [
+        "court.tmx"
+    ],
+    "project": "Pong-lua.tiled-project",
+    "recentFiles": [
+        "court.tmx"
+    ],
+    "tileset.embedInMap": true
+}
