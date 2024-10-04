@@ -15,6 +15,13 @@ function love.load()
     p1paddle.speed = 300
     p1paddle.sprite = love.graphics.newImage('sprites/fancy-paddle-blue.png')
 
+    -- cpu paddle
+    cpuPaddle = {}
+    cpuPaddle.x = 767
+    cpuPaddle.y = 250
+    cpuPaddle.speed = 300
+    cpuPaddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
+
 
 
     ball = love.graphics.newImage('sprites/fancy-ball.png')
@@ -49,8 +56,12 @@ function love.draw()
 
   -- background
     gameMap:draw()
+    -- drawing player 1 paddle
     love.graphics.draw(p1paddle.sprite, p1paddle.x, p1paddle.y)
-  -- love.graphics.draw(cpuPaddle, 766, 250)
-  love.graphics.draw(ball, 385, 300)
+
+  -- drawing cpu paddle
+    love.graphics.draw(cpuPaddle.sprite, cpuPaddle.x, cpuPaddle.y)
+  -- drawing ball
+    love.graphics.draw(ball, 385, 300)
   -- camera
 end
