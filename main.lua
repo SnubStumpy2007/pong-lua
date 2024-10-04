@@ -3,6 +3,7 @@ function love.load()
 
     anim8 = require('libraries/anim8')
     sti = require('libraries.sti')
+    wf = require('libraries.windfield')
 
        -- code for map
        gameMap = sti('maps/court.lua')
@@ -21,16 +22,16 @@ function love.load()
     cpuPaddle = {}
     cpuPaddle.x = 767
     cpuPaddle.y = 250
-    cpuPaddle.speed = 300
+    cpuPaddle.speed = 5
     cpuPaddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
 
     -- ball
     ball = {}
     ball.x = 385
     ball.y = 300
-    ball.speed = 300
+    ball.speed = 10
     ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
-
+    -- x = 385, y = 300
  
 
     -- starting player scores
@@ -58,6 +59,9 @@ function love.load()
  -- p1animations.down = anim8.newAnimation(p1paddle.grid('1-4', 1), 0.2)
  -- p1paddle.anim = p1paddle.animations.down
 
+ -- ball animations and movement
+-- ball.sprite = love.math.random(2) == 1 and 100 or -100
+
 end
 
 
@@ -65,12 +69,17 @@ function love.update(dt)
 
   local isMoving = true
 
--- Player 1 paddle animatioins
+-- Player 1 paddle animations
   if love.keyboard.isDown("w") then
     p1paddle.y = p1paddle.y - p1paddle.speed
   elseif love.keyboard.isDown("s") then
     p1paddle.y = p1paddle.y + p1paddle.speed
   end
+
+  -- cpu paddle animations
+
+  -- ball animatiions
+  
 
 end
 
