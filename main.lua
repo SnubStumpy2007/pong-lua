@@ -22,9 +22,12 @@ function love.load()
     cpuPaddle.speed = 300
     cpuPaddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
 
-
-
-    ball = love.graphics.newImage('sprites/fancy-ball.png')
+    -- ball
+    ball = {}
+    ball.x = 385
+    ball.y = 300
+    ball.speed = 300
+    ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
 
     -- code for map
     gameMap = sti('maps/court.lua')
@@ -62,6 +65,6 @@ function love.draw()
   -- drawing cpu paddle
     love.graphics.draw(cpuPaddle.sprite, cpuPaddle.x, cpuPaddle.y)
   -- drawing ball
-    love.graphics.draw(ball, 385, 300)
+    love.graphics.draw(ball.sprite, ball.x, ball.y)
   -- camera
 end
