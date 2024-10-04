@@ -33,8 +33,18 @@ function love.load()
     gameMap = sti('maps/court.lua')
 
     -- starting player scores
-    p1Score = { }
+
+    -- player 1 score
+    p1Score = {}
+    p1score.x = 300
+    p1score.y = 0
+    p1Score.sprite = love.graphics.newImage('sprites/Numberssheet.png')
+
+    -- cpu score
     cpuScore = {}
+    cpuScore.x = 600
+    cpuScore.y = 0
+    cpuScore.sprite = love.graphics.newImage('sprites/Numberssheet.png')
 
 -- animations
   --p1animations = {}
