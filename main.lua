@@ -24,8 +24,8 @@ function love.load()
 
 -- animations
   p1animations = {}
-  p1animations.down = anim8.newAnimation(p1paddle.grid('1-4', 1), 0.2)
-
+ -- p1animations.down = anim8.newAnimation(p1paddle.grid('1-4', 1), 0.2)
+ -- p1paddle.anim = p1paddle.animations.down
 
 end
 
@@ -46,6 +46,7 @@ function love.draw()
   -- background
   -- love.graphics.draw(background, 0,0)
   -- love.graphics.draw(p1Paddle, 0,250)
+  --p1paddle.anim:draw(p1paddle.sprite, p1paddle.x, p1paddle.y, nil, 1, nil, 16, 64)
   -- love.graphics.draw(cpuPaddle, 766, 250)
   love.graphics.draw(ball, 385, 300)
   -- camera
