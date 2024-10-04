@@ -14,7 +14,7 @@ function love.load()
     p1paddle = {}
     p1paddle.x = 0
     p1paddle.y = 250
-    p1paddle.speed = 300
+    p1paddle.speed = 10
     p1paddle.sprite = love.graphics.newImage('sprites/fancy-paddle-blue.png')
 
     -- cpu paddle
@@ -63,7 +63,14 @@ end
 
 function love.update(dt)
 
--- animation for the ball
+  local isMoving = true
+
+-- Player 1 paddle animatioins
+  if love.keyboard.isDown("w") then
+    p1paddle.y = p1paddle.y - p1paddle.speed
+  elseif love.keyboard.isDown("s") then
+    p1paddle.y = p1paddle.y + p1paddle.speed
+  end
 
 end
 
