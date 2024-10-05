@@ -14,10 +14,10 @@ function love.load()
   
     -- p1 paddle 
     p1paddle = {}
-    p1paddle.collider = world:newRectangleCollider(0, 250, 32, 128)
+    p1paddle.collider = world:newRectangleCollider(0, 200, 32, 128)
     p1paddle.x = 0
-    p1paddle.y = 250
-    p1paddle.speed = 10
+    p1paddle.y = 200
+    p1paddle.speed = 5
     p1paddle.sprite = love.graphics.newImage('sprites/fancy-paddle-blue.png')
 
     -- player 1 paddle animations
@@ -81,13 +81,15 @@ function love.update(dt)
 
 -- Player 1 paddle animations
   if love.keyboard.isDown("w") then
-   -- p1paddle.y = p1paddle.y - p1paddle.speed
-   vy = p1paddle.speed - 1
-   isMoving = true
+    p1paddle.y = p1paddle.y  - p1paddle.speed
+   -- p1paddle.collider:setLinearVelocity(0,- p1paddle.speed)
+   --vy = p1paddle.speed - 1
+   --isMoving = true
   elseif love.keyboard.isDown("s") then
-   --  p1paddle.y = p1paddle.y + p1paddle.speed
-   vy = p1paddle.speed + 1
-   isMoving = true
+     p1paddle.y = p1paddle.y + p1paddle.speed
+     p1paddle.collider:setLinearVelocity(0, p1paddle.speed)
+   --vy = p1paddle.speed + 1
+   --isMoving = true
   end
 
   -- cpu paddle animations
@@ -103,9 +105,9 @@ function love.update(dt)
     -- collisions
     
     world:update(dt)
-    p1paddle.x = p1paddle.collider:getX()
-    p1paddle.y = p1paddle.collider:getY()
-    p1paddle.collider:setLinearVelocity(vx, vy)
+  --  p1paddle.y = p1paddle.collider:getY()
+   -- p1paddle.collider:setLinearVelocity(0, 5)
+    
  
 end
 
