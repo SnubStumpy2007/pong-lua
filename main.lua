@@ -20,6 +20,8 @@ function love.load()
     p1paddle.speed = 10
     p1paddle.sprite = love.graphics.newImage('sprites/fancy-paddle-blue.png')
 
+    -- player 1 paddle animations
+   -- p1paddle.anim = p1paddle.animations.down
     -- cpu paddle
     cpuPaddle = {}
     cpuPaddle.x = 767
@@ -73,15 +75,19 @@ end
 
 function love.update(dt)
 
-  local isMoving = true
-  vx = 0
-  vy = 0
+  -- local isMoving = false
+  -- vx = 0
+  -- vy = 0
 
 -- Player 1 paddle animations
   if love.keyboard.isDown("w") then
     p1paddle.y = p1paddle.y - p1paddle.speed
+   -- vy = p1paddle.speed - 1
+   -- isMoving = true
   elseif love.keyboard.isDown("s") then
-    p1paddle.y = p1paddle.y + p1paddle.speed
+     p1paddle.y = p1paddle.y + p1paddle.speed
+   -- vy = p1paddle.speed + 1
+   -- isMoving = true
   end
 
   -- cpu paddle animations
@@ -94,7 +100,12 @@ function love.update(dt)
 
   -- ball animatiions
   
+  -- velocity updates
+--   if isMoving == false then
+--     p1paddle.anim:gotoFrame(2)
+-- end
 
+-- player.anim:update(dt)
 end
 
 function love.draw()
