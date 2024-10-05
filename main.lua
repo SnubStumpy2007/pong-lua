@@ -81,13 +81,13 @@ function love.update(dt)
 
 -- Player 1 paddle animations
   if love.keyboard.isDown("w") then
-    p1paddle.y = p1paddle.y - p1paddle.speed
-   --vy = p1paddle.speed - 1
-   --isMoving = true
+   -- p1paddle.y = p1paddle.y - p1paddle.speed
+   vy = p1paddle.speed - 1
+   isMoving = true
   elseif love.keyboard.isDown("s") then
-     p1paddle.y = p1paddle.y + p1paddle.speed
-   --vy = p1paddle.speed + 1
-   --isMoving = true
+   --  p1paddle.y = p1paddle.y + p1paddle.speed
+   vy = p1paddle.speed + 1
+   isMoving = true
   end
 
   -- cpu paddle animations
@@ -103,6 +103,9 @@ function love.update(dt)
     -- collisions
     
     world:update(dt)
+    p1paddle.x = p1paddle.collider:getX()
+    p1paddle.y = p1paddle.collider:getY()
+    p1paddle.collider:setLinearVelocity(vx, vy)
  
 end
 
