@@ -67,27 +67,27 @@ function love.load()
 -- ball.sprite = love.math.random(2) == 1 and 100 or -100
 
 -- collisions
-p1paddle.x = p1paddle.collider:getX()
-p1paddle.y = p1paddle.collider:getY()
+-- p1paddle.x = p1paddle.collider:getX()
+-- p1paddle.y = p1paddle.collider:getY()
 
 end
 
 
 function love.update(dt)
 
-  -- local isMoving = false
-  -- vx = 0
-  -- vy = 0
+  local isMoving = false
+  vx = 0
+  vy = 0
 
 -- Player 1 paddle animations
   if love.keyboard.isDown("w") then
     p1paddle.y = p1paddle.y - p1paddle.speed
-   -- vy = p1paddle.speed - 1
-   -- isMoving = true
+   --vy = p1paddle.speed - 1
+   --isMoving = true
   elseif love.keyboard.isDown("s") then
      p1paddle.y = p1paddle.y + p1paddle.speed
-   -- vy = p1paddle.speed + 1
-   -- isMoving = true
+   --vy = p1paddle.speed + 1
+   --isMoving = true
   end
 
   -- cpu paddle animations
@@ -99,13 +99,11 @@ function love.update(dt)
     end
 
   -- ball animatiions
-  
-  -- velocity updates
---   if isMoving == false then
---     p1paddle.anim:gotoFrame(2)
--- end
-
--- player.anim:update(dt)
+    
+    -- collisions
+    
+    world:update(dt)
+ 
 end
 
 function love.draw()
