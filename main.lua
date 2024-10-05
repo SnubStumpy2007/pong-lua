@@ -4,6 +4,7 @@ function love.load()
     anim8 = require('libraries/anim8')
     sti = require('libraries.sti')
     wf = require('libraries.windfield')
+    world = wf.newWorld(0, 0)
 
        -- code for map
        gameMap = sti('maps/court.lua')
@@ -13,6 +14,7 @@ function love.load()
   
     -- p1 paddle 
     p1paddle = {}
+    p1paddle.collider = world:newRectangleCollider(0, 250, 32, 128)
     p1paddle.x = 0
     p1paddle.y = 250
     p1paddle.speed = 10
@@ -22,7 +24,7 @@ function love.load()
     cpuPaddle = {}
     cpuPaddle.x = 767
     cpuPaddle.y = 250
-    cpuPaddle.speed = 5
+    cpuPaddle.speed = 10
     cpuPaddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
 
     -- ball
@@ -62,12 +64,18 @@ function love.load()
  -- ball animations and movement
 -- ball.sprite = love.math.random(2) == 1 and 100 or -100
 
+-- collisions
+p1paddle.x = p1paddle.collider:getX()
+p1paddle.y = p1paddle.collider:getY()
+
 end
 
 
 function love.update(dt)
 
   local isMoving = true
+  vx = 0
+  vy = 0
 
 -- Player 1 paddle animations
   if love.keyboard.isDown("w") then
@@ -77,6 +85,12 @@ function love.update(dt)
   end
 
   -- cpu paddle animations
+  -- temporary manual paddles to test collisions
+    if love.keyboard.isDown("up") then
+      cpuPaddle.y = cpuPaddle.y - cpuPaddle.speed
+    elseif love.keyboard.isDown("down") then
+      cpuPaddle.y = cpuPaddle.y + cpuPaddle.speed
+    end
 
   -- ball animatiions
   
@@ -94,5 +108,6 @@ function love.draw()
     love.graphics.draw(cpuPaddle.sprite, cpuPaddle.x, cpuPaddle.y)
   -- drawing ball
     love.graphics.draw(ball.sprite, ball.x, ball.y)
-  -- camera
+  -- Draw collisions
+    world:draw()
 end
