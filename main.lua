@@ -42,7 +42,7 @@ function love.load()
     ball.speed = 5
     ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
     ball.collider = world:newRectangleCollider(385, 300, 32, 32)
-    ball.collider:setLinearVelocity(200,500)
+    ball.collider:applyLinearImpulse(100, 300)
     ball.collider:setCollisionClass("ball")
 
     walls  = {}
@@ -50,6 +50,7 @@ function love.load()
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
             local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
             wall:setType('static')
+            wall:applyLinearImpulse(1000, 0)
             table.insert(walls, wall)
         end
     end
