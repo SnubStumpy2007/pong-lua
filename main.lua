@@ -6,6 +6,7 @@ function love.load()
     wf = require('libraries.windfield')
     world = wf.newWorld(0, 0)
     world:addCollisionClass("Solid")
+    world:addCollisionClass("ball")
 
        -- code for map
        gameMap = sti('maps/court.lua')
@@ -41,8 +42,17 @@ function love.load()
     ball.speed = 5
     ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
     ball.collider = world:newRectangleCollider(385, 300, 32, 32)
-    ball.collider:setLinearVelocity(-200,100)
+    ball.collider:setLinearVelocity(200,500)
+    ball.collider:setCollisionClass("ball")
 
+    walls  = {}
+    if gameMap.layers["Walls"] then
+        for i, obj in pairs(gameMap.layers["Walls"].objects) do
+            local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
+            wall:setType('static')
+            table.insert(walls, wall)
+        end
+    end
  
 
     -- starting player scores

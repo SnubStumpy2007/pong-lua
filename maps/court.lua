@@ -9,8 +9,8 @@ return {
   height = 20,
   tilewidth = 32,
   tileheight = 32,
-  nextlayerid = 2,
-  nextobjectid = 1,
+  nextlayerid = 3,
+  nextobjectid = 5,
   properties = {},
   tilesets = {
     {
@@ -82,6 +82,48 @@ return {
         84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 163, 84, 84, 109, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84,
         84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 163, 84, 84, 109, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84,
         84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 163, 84, 84, 109, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 2,
+      name = "Walls",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 3,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 8,
+          y = 608,
+          width = 976,
+          height = 24,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 4,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2,
+          y = -17,
+          width = 976,
+          height = 20,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
       }
     }
   }

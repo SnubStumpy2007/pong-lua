@@ -8,11 +8,11 @@
     ],
     "fileStates": {
         "court.tmx": {
-            "scale": 0.8915826612903225,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 443.5931935100911,
-                "y": 493.5044377861949
+                "x": 547,
+                "y": 430
             }
         },
         "court.tmx#fancy-court": {
