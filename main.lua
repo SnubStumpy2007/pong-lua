@@ -5,6 +5,7 @@ function love.load()
     sti = require('libraries.sti')
     wf = require('libraries.windfield')
     world = wf.newWorld(0, 0)
+    world:addCollisionClass("Solid")
 
        -- code for map
        gameMap = sti('maps/court.lua')
@@ -12,33 +13,36 @@ function love.load()
 
     -- defining player paddles
   
-    -- p1 paddle 
     p1paddle = {}
     p1paddle.x = 0
     p1paddle.y = 200
-    p1paddle.speed = 10
+    p1paddle.speed = 450
     p1paddle.collider = world:newRectangleCollider(0,200,32,128)
     p1paddle.collider:setFixedRotation(true)
+    p1paddle.collider:setType('static')
+    p1paddle.collider:setCollisionClass("Solid")
     p1paddle.sprite = love.graphics.newImage('sprites/fancy-paddle-blue.png')
 
-    -- player 1 paddle animations
-   -- p1paddle.anim = p1paddle.animations.down
+
     -- cpu paddle
     cpuPaddle = {}
     cpuPaddle.x = 767
     cpuPaddle.y = 250
     cpuPaddle.speed = 10
+    cpuPaddle.collider = world:newRectangleCollider(767, 250, 32, 128)
+    cpuPaddle.collider:setType('static')
+    cpuPaddle.collider:setCollisionClass("Solid")
     cpuPaddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
 
     -- ball
     ball = {}
     ball.x = 385
     ball.y = 300
-    ball.speed = {x = 5, y = 5}
+    ball.speed = 5
     ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
     ball.collider = world:newRectangleCollider(385, 300, 32, 32)
-    ball.collider:setLinearVelocity(2,2)
-    -- x = 385, y = 300
+    ball.collider:setLinearVelocity(-200,100)
+
  
 
     -- starting player scores
@@ -69,47 +73,53 @@ function love.load()
  -- ball animations and movement
 -- ball.sprite = love.math.random(2) == 1 and 100 or -100
 
--- collisions
--- p1paddle.x = p1paddle.collider:getX()
--- p1paddle.y = p1paddle.collider:getY()
 
 end
 
 
 function love.update(dt)
 
-  local isMoving = false
-  -- vx = 0
-  -- vy = 0
+  local moveY = 0
+  local cpuMoveY = 0
+  
 
 -- Player 1 paddle animations
   if love.keyboard.isDown("w") then
-    p1paddle.y = p1paddle.y  - p1paddle.speed
-   -- p1paddle.collider:setLinearVelocity(0,- p1paddle.speed)
-   --vy = p1paddle.speed - 1
-   --isMoving = true
+    moveY = -p1paddle.speed * dt
   elseif love.keyboard.isDown("s") then
-     p1paddle.y = p1paddle.y + p1paddle.speed
-   --vy = p1paddle.speed + 1
-   --isMoving = true
+     moveY = p1paddle.speed * dt
   end
 
   -- cpu paddle animations
   -- temporary manual paddles to test collisions
     if love.keyboard.isDown("up") then
-      cpuPaddle.y = cpuPaddle.y - cpuPaddle.speed
+      cpuMoveY = -cpuPaddle.speed * dt
     elseif love.keyboard.isDown("down") then
-      cpuPaddle.y = cpuPaddle.y + cpuPaddle.speed
+      cpuMoveY = cpuPaddle.speed * dt
     end
 
   -- ball animatiions
     
     -- collisions
-    
-    -- world:update(dt)
-  --  p1paddle.y = p1paddle.collider:getY()
-   -- p1paddle.collider:setLinearVelocity(0, 5)
-    
+    -- Player 1 paddle
+     world:update(dt)
+     p1paddle.x = p1paddle.collider:getX()
+     p1paddle.y = p1paddle.collider:getY()
+
+      if moveY ~= 0 then
+        
+        local currentX, currentY = p1paddle.collider:getPosition()
+        p1paddle.collider:setPosition(currentX, currentY + moveY)
+      end
+
+  -- CPU Paddle
+  cpuPaddle.x = cpuPaddle.collider:getX()
+  cpuPaddle.y = cpuPaddle.collider:getY()
+  if cpuMoveY ~= 0 then
+    local cpuCurrentX, cpuCurrentY = cpuPaddle.collider:getPosition()
+    cpuPaddle.collider:setPosition(cpuCurrentX, cpuCurrentY + cpuMoveY)
+  end
+  
  
 end
 
@@ -118,10 +128,12 @@ function love.draw()
   -- background
     gameMap:draw()
     -- drawing player 1 paddle
-    love.graphics.draw(p1paddle.sprite, p1paddle.x, p1paddle.y)
+    local p1X, p1Y = p1paddle.collider:getPosition()
+    love.graphics.draw(p1paddle.sprite, p1X - (p1paddle.sprite:getWidth() / 2), p1Y - (p1paddle.sprite:getHeight() / 2))
 
   -- drawing cpu paddle
-    love.graphics.draw(cpuPaddle.sprite, cpuPaddle.x, cpuPaddle.y)
+  local cpuX, cpuY = cpuPaddle.collider:getPosition()
+    love.graphics.draw(cpuPaddle.sprite, cpuX - (cpuPaddle.sprite:getWidth() / 2), cpuY - (cpuPaddle.sprite:getHeight()/ 2))
   -- drawing ball
     love.graphics.draw(ball.sprite, ball.x, ball.y)
   -- Draw collisions
