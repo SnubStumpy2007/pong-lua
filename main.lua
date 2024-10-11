@@ -28,7 +28,7 @@ function love.load()
     cpuPaddle = {}
     cpuPaddle.x = 767
     cpuPaddle.y = 250
-    cpuPaddle.speed = 10
+    cpuPaddle.speed = 440
     cpuPaddle.collider = world:newRectangleCollider(767, 250, 32, 128)
     cpuPaddle.collider:setType('static')
     cpuPaddle.collider:setCollisionClass("Solid")
