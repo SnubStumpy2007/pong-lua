@@ -92,6 +92,7 @@ function love.update(dt)
 
   local moveY = 0
   local cpuMoveY = 0
+  local ballMove = 0
   
 
 -- Player 1 paddle animations
@@ -131,6 +132,13 @@ function love.update(dt)
     cpuPaddle.collider:setPosition(cpuCurrentX, cpuCurrentY + cpuMoveY)
   end
   
+  -- ball collision zone moves with sprite
+  ball.x = ball.collider:getX()
+  ball.y = ball.collider:getY()
+  if ballMove ~= 0 then
+    local ballCurrentX, ballCurrentY = ball.collider:getPosition()
+    ball.collider:setPosition(ballCurrentX, ballCurrentY + ballMove)
+  end
  
 end
 
@@ -146,7 +154,8 @@ function love.draw()
   local cpuX, cpuY = cpuPaddle.collider:getPosition()
     love.graphics.draw(cpuPaddle.sprite, cpuX - (cpuPaddle.sprite:getWidth() / 2), cpuY - (cpuPaddle.sprite:getHeight()/ 2))
   -- drawing ball
-    love.graphics.draw(ball.sprite, ball.x, ball.y)
+  local ballX, ballY = ball.collider:getPosition()
+    love.graphics.draw(ball.sprite, ballX - (ball.sprite:getWidth() / 2), ballY - (ball.sprite:getHeight() / 2))
   -- Draw collisions
      world:draw()
 end
