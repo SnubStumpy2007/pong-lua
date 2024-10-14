@@ -76,15 +76,6 @@ function love.load()
     -- cpuScore.y = 0
     -- cpuScore.spriteSheet = love.graphics.newImage('sprites/Numberssheet.png')
 
--- animations
-  --p1animations = {}
- -- p1animations.down = anim8.newAnimation(p1paddle.grid('1-4', 1), 0.2)
- -- p1paddle.anim = p1paddle.animations.down
-
- -- ball animations and movement
--- ball.sprite = love.math.random(2) == 1 and 100 or -100
-
-
 end
 
 
