@@ -56,25 +56,7 @@ function love.load()
     end
  
 
-    -- starting player scores
-
-   -- player 1 score
-    -- p1Score = {}
-    -- p1score.x = 300
-    -- p1score.y = 0
-    -- p1Score.spriteSheet = love.graphics.newImage('sprites/Numberssheet.png')
-    -- p1Score.grid = anim8.newGrid(12, 18, p1Score.spriteSheet:getWidth(), p1Score.spriteSheet:getHeight())
-
-  -- player 1 score animations
-    -- p1Score.animations = {}
-    -- p1Score.animations.right = anim8.newAnimation(p1Score.grid('1-4', 1), 0.2)
-
-
-    -- cpu score
-    -- cpuScore = {}
-    -- cpuScore.x = 600
-    -- cpuScore.y = 0
-    -- cpuScore.spriteSheet = love.graphics.newImage('sprites/Numberssheet.png')
+    -- player scores
 
 end
 
