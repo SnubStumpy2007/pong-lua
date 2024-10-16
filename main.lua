@@ -50,6 +50,7 @@ function love.load()
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
             local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
             wall:setType('static')
+            wall:setCollisionClass("Solid")
             wall:applyLinearImpulse(1000, 0)
             table.insert(walls, wall)
         end
@@ -111,6 +112,13 @@ function love.update(dt)
   if ballMove ~= 0 then
     local ballCurrentX, ballCurrentY = ball.collider:getPosition()
     ball.collider:setPosition(ballCurrentX, ballCurrentY + ballMove)
+  end
+
+  -- debug this
+  if ball.collider:enter("Solid") then
+    local collision_data = ball.collider:getEnterCollisionData("Solid")
+    local bounce = collision_data.collider:getObject()
+    bounce:applyLinearImpulse(100, 0)
   end
  
 end
