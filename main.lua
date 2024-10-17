@@ -116,9 +116,8 @@ function love.update(dt)
 
   -- debug this
   if ball.collider:enter("Solid") then
-    local collision_data = ball.collider:getEnterCollisionData("Solid")
-    local bounce = collision_data.collider:getObject()
-    bounce:applyLinearImpulse(100, 0)
+    ball.collider:applyLinearImpulse(200,0)
+    ball.collider:applyAngularImpulse(1000000)
   end
  
 end
