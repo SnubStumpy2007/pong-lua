@@ -41,8 +41,9 @@ function love.load()
     ball.y = 300
     ball.speed = 1000
     ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
-   ball.collider = world:newCircleCollider(385, 300, 20)
-    ball.collider:applyLinearImpulse(500, 100)
+    ball.collider = world:newCircleCollider(385, 300, 20)
+    ball.collider:applyLinearImpulse(1000, 100)
+    ball.collider:setRestitution(1)
     ball.collider:setCollisionClass("ball")
 
     walls  = {}
@@ -116,8 +117,7 @@ function love.update(dt)
 
   -- debug this
   if ball.collider:enter("Solid") then
-   -- ball.collider:applyLinearImpulse(500,0)
-    ball.collider:applyAngularImpulse(50000)
+    ball.collider:applyAngularImpulse(10000)
   end
  
 end
