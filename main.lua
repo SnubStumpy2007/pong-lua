@@ -29,7 +29,7 @@ function love.load()
     cpuPaddle = {}
     cpuPaddle.x = 767
     cpuPaddle.y = 250
-    cpuPaddle.speed = 440
+    cpuPaddle.speed = 450
     cpuPaddle.collider = world:newRectangleCollider(767, 250, 32, 128)
     cpuPaddle.collider:setType('static')
     cpuPaddle.collider:setCollisionClass("Solid")
@@ -39,10 +39,10 @@ function love.load()
     ball = {}
     ball.x = 385
     ball.y = 300
-    ball.speed = 5
+    ball.speed = 1000
     ball.sprite = love.graphics.newImage('sprites/fancy-ball.png')
-    ball.collider = world:newRectangleCollider(385, 300, 32, 32)
-    ball.collider:applyLinearImpulse(100, 300)
+   ball.collider = world:newCircleCollider(385, 300, 20)
+    ball.collider:applyLinearImpulse(500, 100)
     ball.collider:setCollisionClass("ball")
 
     walls  = {}
@@ -51,7 +51,7 @@ function love.load()
             local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
             wall:setType('static')
             wall:setCollisionClass("Solid")
-            wall:applyLinearImpulse(1000, 0)
+            wall:applyAngularImpulse(5000)
             table.insert(walls, wall)
         end
     end
@@ -116,8 +116,8 @@ function love.update(dt)
 
   -- debug this
   if ball.collider:enter("Solid") then
-    ball.collider:applyLinearImpulse(200,0)
-    ball.collider:applyAngularImpulse(1000000)
+   -- ball.collider:applyLinearImpulse(500,0)
+    ball.collider:applyAngularImpulse(50000)
   end
  
 end
