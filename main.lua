@@ -15,6 +15,7 @@ function love.load()
     -- defining player paddles
   
     p1paddle = {}
+    p1paddle.score = 0
     p1paddle.x = 0
     p1paddle.y = 200
     p1paddle.speed = 450
@@ -27,6 +28,7 @@ function love.load()
 
     -- cpu paddle
     cpuPaddle = {}
+    cpuPaddle.score = 0
     cpuPaddle.x = 767
     cpuPaddle.y = 250
     cpuPaddle.speed = 450
@@ -52,7 +54,7 @@ function love.load()
             local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
             wall:setType('static')
             wall:setCollisionClass("Solid")
-            wall:applyAngularImpulse(5000)
+            wall:applyAngularImpulse(1000)
             table.insert(walls, wall)
         end
     end
@@ -85,7 +87,14 @@ function love.update(dt)
       cpuMoveY = cpuPaddle.speed * dt
     end
 
-  -- ball animatiions
+    -- ball reset
+    -- ball reset
+if love.keyboard.isDown("r") then
+  ball.collider:setPosition(385, 300) -- reset to initial position
+  ball.collider:setLinearVelocity(0, 0) -- stop all movement
+  ball.collider:applyLinearImpulse(1000, 100) -- reapply the initial impulse
+end
+
     
     -- collisions
     -- Player 1 paddle
