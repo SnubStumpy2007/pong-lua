@@ -59,9 +59,8 @@ function love.load()
         end
     end
  
-
-    -- player scores
-
+    -- window size
+    screen = love.window.setMode(800, 600)
 end
 
 
@@ -87,7 +86,6 @@ function love.update(dt)
       cpuMoveY = cpuPaddle.speed * dt
     end
 
-    -- ball reset
     -- ball reset
 if love.keyboard.isDown("r") then
   ball.collider:setPosition(385, 300) -- reset to initial position
@@ -124,11 +122,16 @@ end
     ball.collider:setPosition(ballCurrentX, ballCurrentY + ballMove)
   end
 
-  -- debug this
+    -- if statement for ball bounce.  Speeds up as the game goes
   if ball.collider:enter("Solid") then
     ball.collider:applyAngularImpulse(10000)
   end
  
+  -- score if statements.  If the ball leaves the screen, record a score.  End the game if the score on one side reaches 3.  Best of 5
+    if ball.x <= screen:getWidth() then
+      --p1paddle.score = p1paddle.score + 1
+      print("player score successful")
+    end
 end
 
 function love.draw()
