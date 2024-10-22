@@ -9,10 +9,10 @@
     "fileStates": {
         "court.tmx": {
             "scale": 0.5,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 731,
-                "y": 738
+                "x": 335,
+                "y": 414
             }
         },
         "court.tmx#fancy-court": {

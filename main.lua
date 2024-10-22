@@ -7,6 +7,7 @@ function love.load()
     world = wf.newWorld(0, 0)
     world:addCollisionClass("Solid")
     world:addCollisionClass("ball")
+    world:addCollisionClass("p1Goal")
 
        -- code for map
        gameMap = sti('maps/court.lua')
@@ -58,6 +59,17 @@ function love.load()
             table.insert(walls, wall)
         end
     end
+
+    p1Goal = {}
+    if gameMap.layers["p1Goal"] then
+      for i, obj in pairs(gameMap.layers["p1Goal"].objects) do
+          local p1GoalCollider = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
+          p1GoalCollider:setType('static')
+          p1GoalCollider:setCollisionClass("p1Goal")
+          p1GoalCollider:setSensor(true)
+          table.insert(p1Goal, p1GoalCollider)
+      end
+  end
  
     -- window size
     screen = love.window.setMode(800, 600)
@@ -126,12 +138,17 @@ end
   if ball.collider:enter("Solid") then
     ball.collider:applyAngularImpulse(10000)
   end
+   -- if statement for if the ball enters the p1Goal
+   if ball.collider:enter("p1Goal") then
+    print("CPU Scores")
+    cpuPaddle.score = cpuPaddle.score + 1
+    print("CPU score: ", cpuPaddle.score)
+    ball.collider:setPosition(385, 300) -- reset to initial position
+    ball.collider:setLinearVelocity(0, 0) -- stop all movement
+    ball.collider:applyLinearImpulse(1000, 100) -- reapply the initial impulse
+   end
  
-  -- score if statements.  If the ball leaves the screen, record a score.  End the game if the score on one side reaches 3.  Best of 5
-    if ball.x <= screen:getWidth() then
-      --p1paddle.score = p1paddle.score + 1
-      print("player score successful")
-    end
+
 end
 
 function love.draw()
