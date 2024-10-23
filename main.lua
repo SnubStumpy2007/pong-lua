@@ -59,20 +59,13 @@ function love.load()
             table.insert(walls, wall)
         end
     end
-
-    p1Goal = {}
-    if gameMap.layers["p1Goal"] then
-      for i, obj in pairs(gameMap.layers["p1Goal"].objects) do
-          local p1GoalCollider = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
-          p1GoalCollider:setType('static')
-          p1GoalCollider:setCollisionClass("p1Goal")
-          p1GoalCollider:setSensor(true)
-          table.insert(p1Goal, p1GoalCollider)
-      end
-  end
  
     -- window size
     screen = love.window.setMode(800, 600)
+    map = {}
+    map.height = 800
+    map.width = 600
+    map.offset = 30
 end
 
 
@@ -139,14 +132,9 @@ end
     ball.collider:applyAngularImpulse(10000)
   end
    -- if statement for if the ball enters the p1Goal
-   if ball.collider:enter("p1Goal") then
-    print("CPU Scores")
-    cpuPaddle.score = cpuPaddle.score + 1
-    print("CPU score: ", cpuPaddle.score)
-    ball.collider:setPosition(385, 300) -- reset to initial position
-    ball.collider:setLinearVelocity(0, 0) -- stop all movement
-    ball.collider:applyLinearImpulse(1000, 100) -- reapply the initial impulse
-   end
+  if ball.x <= (map.width + map.offset) then
+    print("cpu score successful")
+  end
  
 
 end

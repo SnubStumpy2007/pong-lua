@@ -125,64 +125,6 @@ return {
           properties = {}
         }
       }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 3,
-      name = "p1Goal",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 8,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = -30,
-          y = -6,
-          width = 22,
-          height = 642,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 4,
-      name = "cpuGoal",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 9,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 814,
-          y = 8,
-          width = 14,
-          height = 596,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
     }
   }
 }
