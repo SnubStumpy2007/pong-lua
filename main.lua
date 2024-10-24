@@ -49,6 +49,11 @@ function love.load()
     ball.collider:setRestitution(1)
     ball.collider:setCollisionClass("ball")
 
+    testBall = {}
+    testBall.x = 400
+    testBall.y = 300
+    testBall.sprite = love.graphics.newImage('sprites/SoccerBall.png')
+
     walls  = {}
     if gameMap.layers["Walls"] then
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
@@ -132,9 +137,13 @@ end
     ball.collider:applyAngularImpulse(10000)
   end
    -- if statement for if the ball enters the p1Goal
-  if ball.x <= (map.width + map.offset) then
-    print("cpu score successful")
-  end
+
+   if ball.x < p1paddle.x then
+    print("cpu score")
+    ball.collider:setPosition(385, 300) -- reset to initial position
+    ball.collider:setLinearVelocity(0, 0) -- stop all movement
+    ball.collider:applyLinearImpulse(1000, 100) -- reapply the initial impuls
+   end
  
 
 end
@@ -153,6 +162,10 @@ function love.draw()
   -- drawing ball
   local ballX, ballY = ball.collider:getPosition()
     love.graphics.draw(ball.sprite, ballX - (ball.sprite:getWidth() / 2), ballY - (ball.sprite:getHeight() / 2))
+
+    -- test ball for position testing
+    love.graphics.draw(testBall.sprite, testBall.x, testBall.y)
+
   -- Draw collisions
      world:draw()
 end
