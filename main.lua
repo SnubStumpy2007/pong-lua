@@ -60,13 +60,6 @@ function love.load()
             table.insert(walls, wall)
         end
     end
- 
-    -- window size
-    screen = love.window.setMode(800, 600)
-    map = {}
-    map.height = 800
-    map.width = 600
-    map.offset = 30
 end
 
 
@@ -132,8 +125,8 @@ end
   if ball.collider:enter("Solid") then
     ball.collider:applyAngularImpulse(10000)
   end
-   -- if statement for if the ball enters the p1Goal
-
+  
+  -- if statements for goal scoring
    if ball.x < p1paddle.x then
     print("cpu score")
     ball.collider:setPosition(385, 300) -- reset to initial position
@@ -145,8 +138,15 @@ end
     ball.collider:setPosition(385, 300) -- reset to initial position
     ball.collider:setLinearVelocity(0, 0) -- stop all movement
     ball.collider:applyLinearImpulse(-1000, -100) -- reapply the initial impuls
+    p1paddle.score = p1paddle.score + 1
    end
  
+   -- if statement for game win coneitions
+   if p1paddle.score == 3 then 
+    love.event.quit()
+   elseif cpuPaddle.score == 3 then
+    love.event.quit()
+   end
 
 end
 
