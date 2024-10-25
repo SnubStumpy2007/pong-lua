@@ -141,6 +141,10 @@ end
     ball.collider:applyLinearImpulse(1000, 100) -- reapply the initial impuls
     cpuPaddle.score = cpuPaddle.score + 1
     print(cpuPaddle.score)
+   elseif ball.x > cpuPaddle.x then
+    ball.collider:setPosition(385, 300) -- reset to initial position
+    ball.collider:setLinearVelocity(0, 0) -- stop all movement
+    ball.collider:applyLinearImpulse(-1000, -100) -- reapply the initial impuls
    end
  
 
