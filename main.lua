@@ -7,7 +7,6 @@ function love.load()
     world = wf.newWorld(0, 0)
     world:addCollisionClass("Solid")
     world:addCollisionClass("ball")
-    world:addCollisionClass("p1Goal")
 
        -- code for map
        gameMap = sti('maps/court.lua')
@@ -163,6 +162,10 @@ function love.draw()
   local ballX, ballY = ball.collider:getPosition()
     love.graphics.draw(ball.sprite, ballX - (ball.sprite:getWidth() / 2), ballY - (ball.sprite:getHeight() / 2))
 
+  -- draw scores
+    love.graphics.print(p1paddle.score, 100, 50, 0, 3)
+    love.graphics.print(cpuPaddle.score, 700, 50, 0, 3)
+
   -- Draw collisions
-     world:draw()
+  --   world:draw()
 end
