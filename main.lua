@@ -27,15 +27,15 @@ function love.load()
 
 
     -- cpu paddle
-    cpuPaddle = {}
-    cpuPaddle.score = 0
-    cpuPaddle.x = 767
-    cpuPaddle.y = 250
-    cpuPaddle.speed = 450
-    cpuPaddle.collider = world:newRectangleCollider(767, 250, 32, 128)
-    cpuPaddle.collider:setType('static')
-    cpuPaddle.collider:setCollisionClass("Solid")
-    cpuPaddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
+    p2Paddle = {}
+    p2Paddle.score = 0
+    p2Paddle.x = 767
+    p2Paddle.y = 250
+    p2Paddle.speed = 450
+    p2Paddle.collider = world:newRectangleCollider(767, 250, 32, 128)
+    p2Paddle.collider:setType('static')
+    p2Paddle.collider:setCollisionClass("Solid")
+    p2Paddle.sprite = love.graphics.newImage('sprites/fancy-paddle-green.png')
 
     -- ball
     ball = {}
@@ -65,7 +65,7 @@ end
 function love.update(dt)
 
   local moveY = 0
-  local cpuMoveY = 0
+  local p2MoveY = 0
   local ballMove = 0
   
 
@@ -76,12 +76,11 @@ function love.update(dt)
      moveY = p1paddle.speed * dt
   end
 
-  -- cpu paddle animations
-  -- temporary manual paddles to test collisions
+  -- player 2 paddle
     if love.keyboard.isDown("up") then
-      cpuMoveY = -cpuPaddle.speed * dt
+      p2MoveY = -p2Paddle.speed * dt
     elseif love.keyboard.isDown("down") then
-      cpuMoveY = cpuPaddle.speed * dt
+      p2MoveY = p2Paddle.speed * dt
     end
 
     -- ball reset
@@ -104,12 +103,12 @@ end
         p1paddle.collider:setPosition(currentX, currentY + moveY)
       end
 
-  -- CPU Paddle
-  cpuPaddle.x = cpuPaddle.collider:getX()
-  cpuPaddle.y = cpuPaddle.collider:getY()
-  if cpuMoveY ~= 0 then
-    local cpuCurrentX, cpuCurrentY = cpuPaddle.collider:getPosition()
-    cpuPaddle.collider:setPosition(cpuCurrentX, cpuCurrentY + cpuMoveY)
+  -- Player 2 Paddle
+  p2Paddle.x = p2Paddle.collider:getX()
+  p2Paddle.y = p2Paddle.collider:getY()
+  if p2MoveY ~= 0 then
+    local cpuCurrentX, cpuCurrentY = p2Paddle.collider:getPosition()
+    p2Paddle.collider:setPosition(cpuCurrentX, cpuCurrentY + p2MoveY)
   end
   
   -- ball collision zone moves with sprite
@@ -130,8 +129,8 @@ end
     ball.collider:setPosition(385, 300) -- reset to initial position
     ball.collider:setLinearVelocity(0, 0) -- stop all movement
     ball.collider:applyLinearImpulse(1000, 100) -- reapply the initial impuls
-    cpuPaddle.score = cpuPaddle.score + 1
-   elseif ball.x > cpuPaddle.x then
+    p2Paddle.score = p2Paddle.score + 1
+   elseif ball.x > p2Paddle.x then
     ball.collider:setPosition(385, 300) -- reset to initial position
     ball.collider:setLinearVelocity(0, 0) -- stop all movement
     ball.collider:applyLinearImpulse(-1000, -100) -- reapply the initial impuls
@@ -141,7 +140,7 @@ end
    -- if statement for game win coneitions
    if p1paddle.score == 3 then 
     love.event.quit()
-   elseif cpuPaddle.score == 3 then
+   elseif p2Paddle.score == 3 then
     love.event.quit()
    end
 
@@ -156,15 +155,15 @@ function love.draw()
     love.graphics.draw(p1paddle.sprite, p1X - (p1paddle.sprite:getWidth() / 2), p1Y - (p1paddle.sprite:getHeight() / 2))
 
   -- drawing cpu paddle
-  local cpuX, cpuY = cpuPaddle.collider:getPosition()
-    love.graphics.draw(cpuPaddle.sprite, cpuX - (cpuPaddle.sprite:getWidth() / 2), cpuY - (cpuPaddle.sprite:getHeight()/ 2))
+  local cpuX, cpuY = p2Paddle.collider:getPosition()
+    love.graphics.draw(p2Paddle.sprite, cpuX - (p2Paddle.sprite:getWidth() / 2), cpuY - (p2Paddle.sprite:getHeight()/ 2))
   -- drawing ball
   local ballX, ballY = ball.collider:getPosition()
     love.graphics.draw(ball.sprite, ballX - (ball.sprite:getWidth() / 2), ballY - (ball.sprite:getHeight() / 2))
 
   -- draw scores
     love.graphics.print(p1paddle.score, 100, 50, 0, 3)
-    love.graphics.print(cpuPaddle.score, 700, 50, 0, 3)
+    love.graphics.print(p2Paddle.score, 700, 50, 0, 3)
 
   -- Draw collisions
   --   world:draw()
